@@ -27,12 +27,39 @@ class Usuario(models.Model):
     senha = models.CharField(max_length=10)
 
 #Paciente
-#numeroSUS, Ranking
 class Paciente(models.Model):
     numeroSUS = models.CharField(max_length=10)
+    ranking = models.CharField(max_length=300)
 
 class Atendente(models.Model):
     unidadeAtendimento = models.CharField(max_length=20)
 
 class Administrador(models.Model):
     gerenciamentoAtendentes = models.CharField(max_length=20)
+
+class Atendimento(models.Model):
+    filaEspera = models.CharField(max_length=200)
+
+class Endereco(models.Model):
+    rua = models.CharField(max_length=200, null=False, blank=False)
+    numero = models.IntegerField(null=False, blank=False)
+    complemento = models.CharField(max_length=200, null=False, blank=False)
+    bairro = models.CharField(max_length=50, null=False, blank=False)
+    cidade = models.CharField(max_length=100, null=False, blank=False)
+    pais = models.CharField(max_length=50, null=False, blank=False)
+
+    def __str__(self):
+        return self.rua
+
+class UnidadeSaude(models.Model):
+    nomeUnidadeSaude = models.CharField(max_length=50)
+    enderecoUnidade = models.OneToOneField(Endereco, on_delete=models.SET_NULL, null=True)
+    distancia = models.CharField(max_length=50)
+
+class Localizacao(models.Model):
+    longitude = models.CharField(max_length=50)
+    latitude = models.CharField(max_length=50)
+
+class Servico(models.Model):
+    nomeServico = models.CharField(max_length=100)
+    descricaoServico = models.CharField(max_length=100)
