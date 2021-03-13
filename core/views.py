@@ -3,11 +3,13 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Card
 
 # Create your views here.
 @login_required(login_url='/login/')
-def index(request):
-    return render(request, 'index.html')
+def list_all_susmap(request):
+    card = Card.objects.filter(active=True)
+    return render(request, 'list.html', {'card':card})
 
 def logout_user(request):
     print(request.user)

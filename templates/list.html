@@ -1,0 +1,19 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+
+    <!--{% for p in card %}
+       <p>{{ p.city}}</p>
+        <p>{{ p.description}}</p>
+    {% endfor %}
+    -->
+    <div class="container">
+        <div class="row">
+            {%for p in card%}
+            <div class="col-sm-4">
+                <p>{{p.city}}</p>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+{%endblock%}
