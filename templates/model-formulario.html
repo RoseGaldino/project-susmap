@@ -1,0 +1,90 @@
+<style>
+    .container{
+    display: flex;
+    width: 100%;
+    height: 90vh;
+}
+
+#formulario{
+    margin-top: 10%;
+}
+
+.plano-externo{
+    background-color: #e6f5ff;
+}
+
+legend{
+    font-style:bold;
+  font-family: “Segoe UI”,”Arial”,”Times New Roman”;
+}
+h2{
+    font-style:bold;
+    font-family: “Segoe UI”,”Arial”,”Times New Roman”; 
+}
+
+.titulo {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 35px;
+}
+
+.box-qualificadores {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 45px;
+}
+
+.qualificador {
+    width: calc(33.33% - 4px );
+    max-width: 100%;
+    padding: 30px 15px;
+    border: 1px solid rgba(17,17,17,0.2);
+    border-radius: 3px;
+    margin: 2px;
+    transition: 1s;
+}
+
+.qualificador:hover {
+    background-color: rgb(238, 232, 232);
+    transition: 1s;
+}
+
+.qualificador select {
+    width: 100%;
+    max-width: 100%;
+    height: 37px;
+}
+
+@media only screen and (max-width: 800px) {
+    .qualificador {
+        width: calc(50% - 4px );
+    }
+
+}
+
+@media only screen and (max-width: 400px) {
+    .qualificador {
+        width: calc(100% - 4px );
+    }
+
+}
+</style>
+<h1 class="titulo">Selecione um dos qualificadores</h1>
+
+<section class="box-qualificadores">
+
+   <div class="qualificador" *ngFor="let sintoma of this.sintomas">
+     <h3>{{ sintoma.title }}</h3>     
+     <select>
+        <option value="">Selecione</option>
+       <option value="" *ngFor="let qualificador of sintoma.qualificadores ">{{ qualificador.title }}</option>
+     </select>
+   </div>
+       <a routerLink="/unidade-atendimento" href="#">
+        <button type="submit" class="btn btn-primary">Próximo</button>
+       </a>
+       
+</section>

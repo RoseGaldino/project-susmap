@@ -27,6 +27,8 @@ SECRET_KEY = '2*_5p*)gqntg1r0!(sl&xo85%lhejoc1d2!$q8%h)&j4+zd#uh'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 CORS_ORIGIN_ALLOW_ALL = True
 
 

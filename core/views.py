@@ -10,6 +10,7 @@ from .models import Card
 def list_all_susmap(request):
     card = Card.objects.filter(active=True)
     return render(request, 'list.html', {'card':card})
+#Dicionário -> {'card':card}, 'pet' vai ser todo resultado de Card.objects.filter(active=True)
 
 def logout_user(request):
     print(request.user)

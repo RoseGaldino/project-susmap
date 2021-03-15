@@ -8,7 +8,7 @@ class Card(models.Model):
     phone = models.CharField(max_length=11)
     email = models.EmailField()
     beging_date = models.DateTimeField(auto_now_add=True)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='card')
     active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -17,6 +17,27 @@ class Card(models.Model):
 
     class card:
         db_table = 'card'
+
+class Qualificadores(models.Model):
+    name = models.CharField(max_length=50)
+    #sintoma
+
+    def __str__(self):
+        return str(self.id)
+
+    class card:
+        db_table = 'qualificadores'
+
+class Sintomas(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    #qualificadores
+
+    def __str__(self):
+        return str(self.id)
+
+    class card:
+        db_table = 'sintomas'
 
 #Usuário
 class Usuario(models.Model):
