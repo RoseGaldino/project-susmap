@@ -10,7 +10,23 @@ from .models import Card
 def list_all_susmap(request):
     card = Card.objects.filter(active=True)
     return render(request, 'list.html', {'card':card})
-#Dicionário -> {'card':card}, 'pet' vai ser todo resultado de Card.objects.filter(active=True)
+#Dicionário -> {'card':card}, 'card' vai ser todo resultado de Card.objects.filter(active=True)
+
+def list_user(request):
+    card = Card.objects.filter(active=True, user=request.user)
+    return render(request, 'list.html', {'card': card})
+
+def card_detail(request, id):
+    card = Card.objects.get(active=True, id=id)
+    print(card.id)
+    return render(request, 'card.html', {'card':card})
+
+def forms(request):
+    return render(request, 'model-formulario.html')
+
+def register_unidades(request):
+    return render(request, 'register_unid.html')
+
 
 def logout_user(request):
     print(request.user)

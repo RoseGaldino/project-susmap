@@ -23,9 +23,13 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('susmap/all/', views.list_all_susmap),
+    path('card/user/', views.list_user),
     path('login/', views.login_user),
+    path('card/detail/<id>/', views.card_detail),
+    path('card/forms/', views.forms),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
+    path('card/register/', views.register_unidades),
     path('', RedirectView.as_view(url="susmap/all/"))
 ]
 urlpatterns += staticfiles_urlpatterns()

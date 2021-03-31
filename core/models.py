@@ -18,9 +18,10 @@ class Card(models.Model):
     class card:
         db_table = 'card'
 
+
 class Qualificadores(models.Model):
     name = models.CharField(max_length=50)
-    #sintoma
+    sintomas = models.ForeignKey("Sintomas", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.id)

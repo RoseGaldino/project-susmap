@@ -28,12 +28,14 @@
             {%endfor%}
             -->
             <div class="col-sm-4">
-                <div class="polaroid">
-                    <img src="{{p.photo.url}}" style="width: 100%; height: 130px;">
-            <di class="container">
-                <p>{{p.city}}</p>
-            </di>
-                </div>
+                <a href="/card/detail/{{p.id}}">
+                    <div class="polaroid">
+                        <img src="{{p.photo.url}}" style="width: 100%; height: 130px;">
+                        <di class="container">
+                            <p>{{p.city}}</p>
+                        </di>
+                    </div>
+                </a>
             </div>
             {%endfor%}
         </div>

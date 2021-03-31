@@ -1,3 +1,6 @@
+{%extends "model-page.html" %}
+
+{% block content %}
 <style>
     .container{
     display: flex;
@@ -76,15 +79,16 @@ h2{
 
 <section class="box-qualificadores">
 
-   <div class="qualificador" *ngFor="let sintoma of this.sintomas">
-     <h3>{{ sintoma.title }}</h3>     
+   <div class="qualificador">
+     <h3></h3>     
      <select>
         <option value="">Selecione</option>
-       <option value="" *ngFor="let qualificador of sintoma.qualificadores ">{{ qualificador.title }}</option>
+       <option></option>
      </select>
    </div>
-       <a routerLink="/unidade-atendimento" href="#">
+       <a href="#">
         <button type="submit" class="btn btn-primary">Próximo</button>
        </a>
        
 </section>
+{% endblock %}
