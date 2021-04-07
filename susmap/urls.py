@@ -27,9 +27,11 @@ urlpatterns = [
     path('login/', views.login_user),
     path('card/detail/<id>/', views.card_detail),
     path('card/forms/', views.forms),
+    path('card/forms/submit', views.set_cardform),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
     path('card/register/', views.register_unidades),
+    path('card/register/submit', views.set_card),
     path('', RedirectView.as_view(url="susmap/all/"))
 ]
 urlpatterns += staticfiles_urlpatterns()

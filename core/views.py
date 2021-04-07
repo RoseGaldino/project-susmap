@@ -21,12 +21,35 @@ def card_detail(request, id):
     print(card.id)
     return render(request, 'card.html', {'card':card})
 
+def form_sintomas(request, id):
+    sintomas =  Sintomas.objects.get(active=True, id=id)
+    print(sintomas.id)
+    return render(request, 'model-formulario.html', {'sintomas':sintomas})
+
+@login_required(login_url='/login/')
 def forms(request):
     return render(request, 'model-formulario.html')
 
+@login_required(login_url='/login/')
+def set_cardform(request):
+    return redirect('/')
+
+@login_required(login_url='/login/')
 def register_unidades(request):
     return render(request, 'register_unid.html')
 
+@login_required(login_url='/login/')
+def set_card(request):
+    city = request.POST.get('city')
+    emai = request.POST.get('email')
+    phone = request.POST.get('phone')
+    description = request.POST.get('description')
+    file = request.FILES.get('file')
+    user = request.user
+    card = Card.objects.create(email=email, phone=phone, description=description,
+                                photo=photo, user=user)
+    print(city)
+    return redirect('/')
 
 def logout_user(request):
     print(request.user)

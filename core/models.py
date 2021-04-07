@@ -32,7 +32,7 @@ class Qualificadores(models.Model):
 class Sintomas(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    #qualificadores
+    #qualificadores = models.ForeignKey("Qualificadores", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.id)

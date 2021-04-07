@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1 class="text-center">Registre sua Unidade de Saude</h1>
+<form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
 <div class="container">
     <div class="form-group">
         <label for="email">E-mail</label>
@@ -25,5 +26,6 @@
     <button class="btn btn-primary" type="submit">
         Cadastrar
     </button>
+</form>
 </div>
 {% endblock %}
