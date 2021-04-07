@@ -41,10 +41,10 @@ def register_unidades(request):
 @login_required(login_url='/login/')
 def set_card(request):
     city = request.POST.get('city')
-    emai = request.POST.get('email')
+    email = request.POST.get('email')
     phone = request.POST.get('phone')
     description = request.POST.get('description')
-    file = request.FILES.get('file')
+    photo = request.FILES.get('file')
     user = request.user
     card = Card.objects.create(email=email, phone=phone, description=description,
                                 photo=photo, user=user)

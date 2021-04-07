@@ -76,12 +76,13 @@ class Endereco(models.Model):
 class UnidadeSaude(models.Model):
     nomeUnidadeSaude = models.CharField(max_length=50)
     enderecoUnidade = models.OneToOneField(Endereco, on_delete=models.SET_NULL, null=True)
-    distancia = models.CharField(max_length=50)
+    servicos = models.ForeignKey("Servico", on_delete=models.CASCADE)
 
 class Localizacao(models.Model):
-    longitude = models.CharField(max_length=50)
-    latitude = models.CharField(max_length=50)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
 
 class Servico(models.Model):
     nomeServico = models.CharField(max_length=100)
     descricaoServico = models.CharField(max_length=100)
+    sintomas = models.ForeignKey("Sintomas", on_delete=models.CASCADE)
