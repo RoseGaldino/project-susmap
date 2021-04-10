@@ -79,13 +79,17 @@ h2{
 
 <section class="box-qualificadores">
 
+
+   {% for sintoma in sintomas %}
    <div class="qualificador">
-     <h3></h3>   
+     <h3>Sintoma {{ sintoma.name }} </h3>   
      <select>
         <option value="">Selecione</option>
        <option></option>
      </select>
    </div>
+   {% endfor %}
+
    <div class="qualificador">
     <h3></h3>   
     <select>
