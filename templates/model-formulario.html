@@ -79,26 +79,16 @@ h2{
 
 <section class="box-qualificadores">
 
+
+   {% for s in sintomas %}
    <div class="qualificador">
-     <h3></h3>   
+     <h3>Sintoma {{s.name}} </h3>   
      <select>
         <option value="">Selecione</option>
        <option></option>
      </select>
    </div>
-   <div class="qualificador">
-    <h3></h3>   
-    <select>
-       <option value="">Selecione</option>
-      <option></option>
-    </select>
-  </div>
-  <div class="qualificador">
-    <h3></h3>   
-    <select>
-       <option value="">Selecione</option>
-      <option></option>
-    </select>
+   {% endfor %}
   </div>
        <a href="#">
         <button type="submit" class="btn btn-primary">Próximo</button>
