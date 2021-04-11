@@ -20,6 +20,8 @@ from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 from . import settings
 
+#app_name='core'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('susmap/all/', views.list_all_susmap),
@@ -32,7 +34,8 @@ urlpatterns = [
     path('logout/', views.logout_user),
     path('card/register/', views.register_unidades),
     path('card/register/submit', views.set_card),
-    path('', RedirectView.as_view(url="susmap/all/"))
+    path('', RedirectView.as_view(url="susmap/all/")),
+    #path('unidades/listar', views.unidades_listar, name='unidades-listar')
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

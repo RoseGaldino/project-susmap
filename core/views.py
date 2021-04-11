@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Card, Sintomas, Qualificadores
+from .models import Card, Sintoma, Qualificador
 
 # Create your views here.
 @login_required(login_url='/login/')
@@ -22,14 +22,15 @@ def card_detail(request, id):
     return render(request, 'card.html', {'card':card})
 
 def form_sintomas(request, id):
-    sintomas =  Sintomas.objects.get(active=True, id=id)
-    print(sintomas.id)
-    return render(request, 'model-formulario.html', {'sintomas':sintomas})
+    sintoma =  Sintoma.objects.get(active=True, id=id)
+    print(sintoma.id)
+    return render(request, 'model-formulario.html', {'sintoma':sintoma})
 
 @login_required(login_url='/login/')
 def forms(request):
-    sintomas =  Sintomas.objects.all()
-    return render(request, 'model-formulario.html', {'sintomas':sintomas})
+    sintoma =  Sintoma.objects.all()
+    context = {'sintoma': sintoma}
+    return render(request, 'model-formulario.html', context)
 
 @login_required(login_url='/login/')
 def set_cardform(request):

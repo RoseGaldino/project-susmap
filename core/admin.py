@@ -1,22 +1,23 @@
 from django.contrib import admin
 from .models import Card
-from .models import Qualificadores
-from .models import Sintomas
+from .models import Qualificador
+from .models import Sintoma
 from .models import Servico
 from .models import UnidadeSaude
+from .models import Paciente
 
 # Register your models here.
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ['id', 'city', 'description', 'user']
 
-@admin.register(Qualificadores)
+@admin.register(Qualificador)
 class QualificadoresAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name']
+    list_display = ['id', 'nome']
 
-@admin.register(Sintomas)
+@admin.register(Sintoma)
 class SintomasAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name']
+    list_display = ['id', 'nome']
 
 @admin.register(Servico)
 class ServicoAdmin(admin.ModelAdmin):
@@ -25,4 +26,7 @@ class ServicoAdmin(admin.ModelAdmin):
 @admin.register(UnidadeSaude)
 class UnidadeSaudeAdmin(admin.ModelAdmin):
     list_display = ['id', 'nomeUnidadeSaude']
+@admin.register(Paciente)
+class PacienteAdmin(admin.ModelAdmin):
+    list_display = ['numeroSUS', 'ranking', 'user']
 

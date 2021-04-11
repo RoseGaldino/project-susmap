@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 class Card(models.Model):
@@ -19,26 +20,25 @@ class Card(models.Model):
         db_table = 'card'
 
 
-class Qualificadores(models.Model):
-    name = models.CharField(max_length=50)
-    sintomas = models.ForeignKey("Sintomas", on_delete=models.CASCADE)
+class Qualificador(models.Model):
+    nome = models.CharField(max_length=50)
+    sintoma = models.ForeignKey("Sintoma", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.id)
 
     class card:
-        db_table = 'qualificadores'
+        db_table = 'qualificador'
 
-class Sintomas(models.Model):
-    name = models.CharField(max_length=50)
-    description = models.TextField()
-    #qualificadores = models.ForeignKey("Qualificadores", on_delete=models.CASCADE)
+class Sintoma(models.Model):
+    nome = models.CharField(max_length=50)
+    descricao = models.TextField()
 
     def __str__(self):
         return str(self.id)
 
     class card:
-        db_table = 'sintomas'
+        db_table = 'sintoma'
 
 #Usuário
 class Usuario(models.Model):
@@ -52,6 +52,11 @@ class Usuario(models.Model):
 class Paciente(models.Model):
     numeroSUS = models.CharField(max_length=10)
     ranking = models.CharField(max_length=300)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
 class Atendente(models.Model):
     unidadeAtendimento = models.CharField(max_length=20)
@@ -61,6 +66,7 @@ class Administrador(models.Model):
 
 class Atendimento(models.Model):
     filaEspera = models.CharField(max_length=200)
+    sintoma = models.ManyToManyField(Sintoma)
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=200, null=False, blank=False)
@@ -73,16 +79,17 @@ class Endereco(models.Model):
     def __str__(self):
         return self.rua
 
+class Servico(models.Model):
+    nomeServico = models.CharField(max_length=100)
+    descricaoServico = models.CharField(max_length=100)
+    sintoma = models.ManyToManyField(Sintoma)
+
 class UnidadeSaude(models.Model):
     nomeUnidadeSaude = models.CharField(max_length=50)
     enderecoUnidade = models.OneToOneField(Endereco, on_delete=models.SET_NULL, null=True)
-    servicos = models.ForeignKey("Servico", on_delete=models.CASCADE)
+    servico = models.ManyToManyField(Servico)
 
 class Localizacao(models.Model):
     longitude = models.FloatField()
     latitude = models.FloatField()
 
-class Servico(models.Model):
-    nomeServico = models.CharField(max_length=100)
-    descricaoServico = models.CharField(max_length=100)
-    sintomas = models.ForeignKey("Sintomas", on_delete=models.CASCADE)
