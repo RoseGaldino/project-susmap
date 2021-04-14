@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core import views
 from django.views.generic import RedirectView
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
@@ -24,18 +24,8 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('susmap/all/', views.list_all_susmap),
-    path('card/user/', views.list_user),
-    path('login/', views.login_user),
-    path('card/detail/<id>/', views.card_detail),
-    path('card/forms/', views.forms),
-    path('card/forms/submit', views.set_cardform),
-    path('login/submit', views.submit_login),
-    path('logout/', views.logout_user),
-    path('card/register/', views.register_unidades),
-    path('card/register/submit', views.set_card),
-    path('', RedirectView.as_view(url="susmap/all/")),
-    #path('unidades/listar', views.unidades_listar, name='unidades-listar')
+    path('', include('main.urls')),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

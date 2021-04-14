@@ -39,6 +39,12 @@ def set_cardform(request):
 @login_required(login_url='/login/')
 def register_unidades(request):
     return render(request, 'register_unid.html')
+    
+@login_required(login_url='/login/')
+def unidades_listar(request, id):
+    sintoma = Sintoma.objects.get(active=True, id=id)
+    print(sintoma.id)
+    return render(request, 'unidades-listar.html', {'sintoma':sintoma})
 
 @login_required(login_url='/login/')
 def set_card(request):

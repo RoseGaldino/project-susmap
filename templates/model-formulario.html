@@ -75,16 +75,19 @@ h2{
 
 }
 </style>
+
 <h1 class="titulo">Selecione um dos qualificadores</h1>
 
 <section class="box-qualificadores">
+
+
    {% for s in sintoma %}
    <div class="qualificador">
      <h3>{{s.nome}}</h3>   
      <select>
         <option value="">Selecione</option>
-        {% for q in s.qualificador_set.all %}
-            <option>{{q.nome}}</option>
+        {% for q in s.qualificador_set_all %}
+       <option>{{q.nome}}</option>
         {% endfor %}
      </select>
    </div>
@@ -94,4 +97,5 @@ h2{
        </a>
        
 </section>
+
 {% endblock %}
