@@ -37,6 +37,11 @@ class Sintoma(models.Model):
     def __str__(self):
         return str(self.id)
 
+    def __eq__(self, sintoma):
+        if (isinstance(sintoma, Sintoma)):
+            return self.nome == sintoma.nome
+        return False
+
     class card:
         db_table = 'sintoma'
 

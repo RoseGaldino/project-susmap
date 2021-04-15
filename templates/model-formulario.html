@@ -75,7 +75,7 @@ h2{
 
 }
 </style>
-
+<form action="{% url 'core:unidades-listar'%}" method="post">{% csrf_token %}
 <h1 class="titulo">Selecione um dos qualificadores</h1>
 
 <section class="box-qualificadores">
@@ -84,10 +84,10 @@ h2{
    {% for s in sintoma %}
    <div class="qualificador">
      <h3>{{s.nome}}</h3>   
-     <select>
+     <select class="form-control" name="{{s.nome}}" >
         <option value="">Selecione</option>
-        {% for q in s.qualificador_set_all %}
-       <option>{{q.nome}}</option>
+        {% for q in s.qualificador_set.all %}
+       <option value="{{q.nome}}">{{q.nome}}</option>
         {% endfor %}
      </select>
    </div>
@@ -97,5 +97,5 @@ h2{
        </a>
        
 </section>
-
+</form>
 {% endblock %}

@@ -5,6 +5,7 @@ from .models import Sintoma
 from .models import Servico
 from .models import UnidadeSaude
 from .models import Paciente
+from .models import Endereco
 
 # Register your models here.
 @admin.register(Card)
@@ -26,7 +27,12 @@ class ServicoAdmin(admin.ModelAdmin):
 @admin.register(UnidadeSaude)
 class UnidadeSaudeAdmin(admin.ModelAdmin):
     list_display = ['id', 'nomeUnidadeSaude']
+
 @admin.register(Paciente)
 class PacienteAdmin(admin.ModelAdmin):
     list_display = ['numeroSUS', 'ranking', 'user']
+
+@admin.register(Endereco)
+class EnderecoAdmin(admin.ModelAdmin):
+    list_display = ['rua', 'numero', 'complemento', 'bairro', 'cidade', 'pais']
 

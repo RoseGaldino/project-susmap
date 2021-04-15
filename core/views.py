@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Card, Sintoma, Qualificador
+from .models import Card, Sintoma, Qualificador, UnidadeSaude, Servico
 
 # Create your views here.
 @login_required(login_url='/login/')
@@ -21,11 +21,6 @@ def card_detail(request, id):
     print(card.id)
     return render(request, 'card.html', {'card':card})
 
-def form_sintomas(request, id):
-    sintoma =  Sintoma.objects.get(active=True, id=id)
-    print(sintoma.id)
-    return render(request, 'model-formulario.html', {'sintoma':sintoma})
-
 @login_required(login_url='/login/')
 def forms(request):
     sintoma =  Sintoma.objects.all()
@@ -41,10 +36,19 @@ def register_unidades(request):
     return render(request, 'register_unid.html')
     
 @login_required(login_url='/login/')
-def unidades_listar(request, id):
-    sintoma = Sintoma.objects.get(active=True, id=id)
-    print(sintoma.id)
-    return render(request, 'unidades-listar.html', {'sintoma':sintoma})
+def unidades_listar(request):
+    sintomas_all = Sintoma.objects.all()
+    sintomas_sets = []
+    for s in sintomas_all:
+        sintomas = request.POST[s.nome]
+        if len(sintomas):
+            sintomas_sets.append(s)
+    print(sintomas_sets)
+    for servico in Servico.objects.all():
+        if sintomas_sets in servico.sintoma.all():
+            print(servico.nomeServico)
+    unidades = UnidadeSaude.objects.all()
+    return render(request, 'unidades-listar.html', { 'unidades': unidades })
 
 @login_required(login_url='/login/')
 def set_card(request):

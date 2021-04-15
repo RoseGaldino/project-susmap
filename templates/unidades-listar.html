@@ -1,4 +1,14 @@
 {% extends "model-page.html" %}
 {% block content %}
 <p>As unidades de atendimento que atende as suas necessidades estão listadas abaixo:</p>
+<section>
+    <div class="container">
+        {% for unidade in unidades %}
+        <div class="row">
+            <div class="col">{{unidade.nomeUnidadeSaude}}</div>
+            <div class="col">{{unidade.enderecoUnidade}}</div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
