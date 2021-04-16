@@ -44,11 +44,24 @@ def unidades_listar(request):
         if len(sintomas):
             sintomas_sets.append(s)
     print(sintomas_sets)
+
+    ## Identificando os serviços relacionados aos sintomas
+    servicos_set = []
     for servico in Servico.objects.all():
-        if sintomas_sets in servico.sintoma.all():
-            print(servico.nomeServico)
-    unidades = UnidadeSaude.objects.all()
-    return render(request, 'unidades-listar.html', { 'unidades': unidades })
+        for sintoma in servico.sintoma.all():
+            if sintoma in sintomas_sets:
+                print('Serviço --> ' + servico.nomeServico)
+                servicos_set.append(servico)
+
+    ## Identificando as unidades relacionadas aos serviços
+    unidades_set = []
+    for unidade in UnidadeSaude.objects.all():
+        for servico in unidade.servico.all():
+            if servico in servicos_set:
+                print('Unidade --> ' + unidade.nomeUnidadeSaude)
+                unidades_set.append(unidade)
+    
+    return render(request, 'unidades-listar.html', { 'unidades': unidades_set })
 
 @login_required(login_url='/login/')
 def set_card(request):
