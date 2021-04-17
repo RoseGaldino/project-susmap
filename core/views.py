@@ -51,6 +51,10 @@ def unidades_listar(request):
     return render(request, 'unidades-listar.html', { 'unidades': unidades })
 
 @login_required(login_url='/login/')
+def tela_confirmacao(request):
+    return render(request, 'tela-confirmacao.html')
+
+@login_required(login_url='/login/')
 def set_card(request):
     city = request.POST.get('city')
     email = request.POST.get('email')
