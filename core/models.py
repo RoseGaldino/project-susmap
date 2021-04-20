@@ -65,13 +65,19 @@ class Paciente(models.Model):
 
 class Atendente(models.Model):
     unidadeAtendimento = models.CharField(max_length=20)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
 
 class Administrador(models.Model):
     gerenciamentoAtendentes = models.CharField(max_length=20)
 
 class Atendimento(models.Model):
-    filaEspera = models.CharField(max_length=200)
-    sintoma = models.ManyToManyField(Sintoma)
+    paciente = models.ForeignKey("Paciente", on_delete=models.CASCADE)
+    unidade = models.ForeignKey("UnidadeSaude", on_delete=models.CASCADE)
+
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=200, null=False, blank=False)

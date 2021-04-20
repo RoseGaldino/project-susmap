@@ -2,29 +2,6 @@
 
 {% block content %}
 <style>
-    .container{
-    display: flex;
-    width: 100%;
-    height: 90vh;
-}
-
-#formulario{
-    margin-top: 10%;
-}
-
-.plano-externo{
-    background-color: #e6f5ff;
-}
-
-legend{
-    font-style:bold;
-  font-family: “Segoe UI”,”Arial”,”Times New Roman”;
-}
-h2{
-    font-style:bold;
-    font-family: “Segoe UI”,”Arial”,”Times New Roman”; 
-}
-
 .titulo {
     text-align: center;
     font-size: 2em;
@@ -45,8 +22,6 @@ h2{
     width: calc(33.33% - 4px );
     max-width: 100%;
     padding: 30px 15px;
-    border: 1px solid rgba(17,17,17,0.2);
-    border-radius: 3px;
     margin: 2px;
     transition: 1s;
 }
@@ -62,37 +37,33 @@ h2{
     height: 37px;
 }
 
-@media only screen and (max-width: 800px) {
-    .qualificador {
-        width: calc(50% - 4px );
-    }
-
-}
-
-@media only screen and (max-width: 400px) {
-    .qualificador {
-        width: calc(100% - 4px );
-    }
-
-}
 </style>
 <form action="{% url 'core:unidades-listar'%}" method="post">{% csrf_token %}
 <h1 class="titulo">Selecione um dos qualificadores</h1>
 
 <section class="box-qualificadores">
-
-
-   {% for s in sintoma %}
-   <div class="qualificador">
-     <h3>{{s.nome}}</h3>   
-     <select class="form-control" name="{{s.nome}}" >
-        <option value="">Selecione</option>
-        {% for q in s.qualificador_set.all %}
-       <option value="{{q.nome}}">{{q.nome}}</option>
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-danger">
+            <strong>Error!</strong>{{message}}
+        </div>
         {% endfor %}
-     </select>
-   </div>
-   {% endfor %}
+    </div>
+    <div class="container">
+        {% for s in sintoma %}
+        <h4>{{s.nome}}</h4>
+        <div class="row">
+            <div class="qualificador col-md-6">   
+                <select class="form-control" name="{{s.nome}}" >
+                    <option value="">Selecione</option>
+                {% for q in s.qualificador_set.all %}
+                    <option value="{{q.nome}}">{{q.nome}}</option>
+                {% endfor %}
+                </select>
+           </div>
+        </div>
+       {% endfor %}
+    </div>
        <a href="#">
         <button type="submit" class="btn btn-primary">Próximo</button>
        </a>

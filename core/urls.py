@@ -17,5 +17,5 @@ urlpatterns = [
     path('card/register/submit', views.set_card),
     path('', RedirectView.as_view(url="susmap/all/")),
     path('unidades/listar', views.unidades_listar, name='unidades-listar'),
-    path('confirmacao/', views.tela_confirmacao, name='tela-confirmacao')
+    path('atendimento/finalizar', views.finalizar_atendimento, name='finalizar-atendimento')
 ]

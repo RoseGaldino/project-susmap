@@ -6,6 +6,7 @@ from .models import Servico
 from .models import UnidadeSaude
 from .models import Paciente
 from .models import Endereco
+from .models import Atendimento
 
 # Register your models here.
 @admin.register(Card)
@@ -23,10 +24,12 @@ class SintomasAdmin(admin.ModelAdmin):
 @admin.register(Servico)
 class ServicoAdmin(admin.ModelAdmin):
     list_display = ['id', 'nomeServico']
+    filter_horizontal = ('sintoma', )
 
 @admin.register(UnidadeSaude)
 class UnidadeSaudeAdmin(admin.ModelAdmin):
     list_display = ['id', 'nomeUnidadeSaude']
+    filter_horizontal = ('servico', )
 
 @admin.register(Paciente)
 class PacienteAdmin(admin.ModelAdmin):
@@ -35,4 +38,8 @@ class PacienteAdmin(admin.ModelAdmin):
 @admin.register(Endereco)
 class EnderecoAdmin(admin.ModelAdmin):
     list_display = ['rua', 'numero', 'complemento', 'bairro', 'cidade', 'pais']
+
+@admin.register(Atendimento)
+class AtendimentoAdmin(admin.ModelAdmin):
+    list_display = ['paciente', 'unidade']
 

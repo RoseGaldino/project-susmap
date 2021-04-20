@@ -11,33 +11,40 @@
 <p class="titulo-unidades" style="margin-bottom: 50;">
     As unidades de atendimento que atende as suas necessidades estão listadas abaixo:
 </p>
-<section>
-    <div class="container">
-        <div class="row">
+<form action="{% url 'core:finalizar-atendimento'%}" method="POST">{% csrf_token %}
+    <section>
+        <div class="container">
+            {% for message in messages %}
+            <div class="alert alert-danger">
+                <strong>Error!</strong>{{message}}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="container">
             {% for unidade in unidades %}
-        <div class="col">
-            <p class=""><b>{{unidade.nomeUnidadeSaude}}</b></p>
-            <p class=""><b>Endereço:</b> {{unidade.enderecoUnidade}}</p>
-            <p><b>Horário de funcionamento:</b></p>
-            <p><b>Tel.:</b></p>
-            <div class="form-check-inline">
+            <div class="row">
+            <div class="col">
                 <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="optradio">Option 1
+                    <input type="radio" class="form-check-input" value="{{unidade.id}}" name="unidade_id">
                 </label>
+                <h5 class=""><b>{{unidade.nomeUnidadeSaude}}</b></h5>
+                <p class=""><b>Endereço:</b> {{unidade.enderecoUnidade}}</p>
+                <p><b>Horário de funcionamento:</b></p>
+                <p><b>Tel.:</b></p>
+            </div><br>
             </div>
-        </div><br>
-        {% endfor %}
+            {% endfor %}
+            <div class="row" style="margin-top: 50;"> 
+                <div class="col-sm-3">
+                    <button class="btn btn-primary botao-anterior" type="submit">Voltar</button>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <button class="btn btn-primary botao-proximo" type="submit">Próximo</button>
+                </div>
+            </div>
         </div>
-        <div class="row" style="margin-top: 50;"> 
-            <div class="col-sm-3">
-                <button class="btn btn-primary botao-anterior" type="submit">Voltar</button>
-            </div>
-            <div class="col-sm-3"></div>
-            <div class="col-sm-3"></div>
-            <div class="col-sm-3">
-                <button class="btn btn-primary botao-proximo" type="submit">Próximo</button>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+</form>
 {% endblock %}
