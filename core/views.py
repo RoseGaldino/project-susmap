@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Card, Sintoma, Qualificador, UnidadeSaude, Servico, Atendimento
+from .models import Card, Sintoma, Qualificador, UnidadeSaude, Servico, Atendimento, Atendente
 
 # Create your views here.
 @login_required(login_url='/login/')
@@ -59,20 +59,32 @@ def unidades_listar(request):
     ## Identificando as unidades relacionadas aos serviços
     unidades_set = []
     for unidade in UnidadeSaude.objects.all():
-        for servico in unidade.servico.all():
-            if servico in servicos_set:
-                print('Unidade --> ' + unidade.nomeUnidadeSaude)
-                unidades_set.append(unidade)
+        unidade_viavel = True
+        for servico in servicos_set:
+            if servico not in unidade.servico.all():
+                unidade_viavel = False
+        if unidade_viavel:
+            print('Unidade --> ' + unidade.nomeUnidadeSaude)
+            unidades_set.append(unidade)
     return render(request, 'unidades-listar.html', { 'unidades': unidades_set})
 
 @login_required(login_url='/login/')
 def finalizar_atendimento(request):
     unidade_id = request.POST.get('unidade_id')
+    if not unidade_id:
+            messages.error(request, 'Favor informar a unidade')
+            return redirect('/unidades/listar')
     unidade = UnidadeSaude.objects.get(id = unidade_id)
     paciente = request.user.paciente
     atendimento = Atendimento(paciente=request.user.paciente, unidade=unidade)
     atendimento.save()
     return render(request, 'atendimento-confirmacao.html')
+
+@login_required(login_url='/login/')
+def fila_atendimento(request):
+    unidades = UnidadeSaude.objects.all()
+    return render(request, 'fila-atendimento.html', {'unidades': unidades})
+
 
 @login_required(login_url='/login/')
 def set_card(request):
@@ -105,7 +117,10 @@ def submit_login(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/')
+            if hasattr(user, 'paciente'):
+                return redirect('/')
+            else:
+                return redirect('/atendimento/listar')
         else:
             messages.error(request, 'Senha ou Usuário inválido')
     return redirect('/login/')

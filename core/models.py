@@ -65,6 +65,7 @@ class Paciente(models.Model):
 
 class Atendente(models.Model):
     unidadeAtendimento = models.CharField(max_length=20)
+    #unidade = models.ForeignKey("UnidadeSaude", on_delete=models.CASCADE)
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
@@ -75,8 +76,10 @@ class Administrador(models.Model):
     gerenciamentoAtendentes = models.CharField(max_length=20)
 
 class Atendimento(models.Model):
+    status_tipos = ((1,"Andamento"), (2,"Finalizado"))
     paciente = models.ForeignKey("Paciente", on_delete=models.CASCADE)
     unidade = models.ForeignKey("UnidadeSaude", on_delete=models.CASCADE)
+    status = models.IntegerField(choices=status_tipos, default=1)
 
 
 class Endereco(models.Model):

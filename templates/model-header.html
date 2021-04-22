@@ -35,14 +35,20 @@
 
 <div id="menu">
     <ul class="nav ml-4 mb-4">
+        {% if request.user.paciente %}
         <li class="nav-item">
             <a class="nav-link" href="/susmap/all/">Início</a>
         </li>
+        {% endif %}
+        {% if request.user.paciente %}
         <li class="nav-item">
             <a class="nav-link" href="/card/forms">Formulário</a>
         </li>
+        {% endif %}
+        {% if request.user.atendente %}
         <li class="nav-item">
-            <a class="nav-link" href="/card/register">Cadastrar Unidade</a>
+            <a class="nav-link" href="/servico/cadastrar">Cadastrar Servico</a>
         </li>
+        {% endif %}
     </ul>
 </div>

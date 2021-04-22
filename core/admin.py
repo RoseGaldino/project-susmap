@@ -7,6 +7,7 @@ from .models import UnidadeSaude
 from .models import Paciente
 from .models import Endereco
 from .models import Atendimento
+from .models import Atendente
 
 # Register your models here.
 @admin.register(Card)
@@ -42,4 +43,8 @@ class EnderecoAdmin(admin.ModelAdmin):
 @admin.register(Atendimento)
 class AtendimentoAdmin(admin.ModelAdmin):
     list_display = ['paciente', 'unidade']
+
+@admin.register(Atendente)
+class AtendenteAdmin(admin.ModelAdmin):
+    list_display = ['unidadeAtendimento', 'user']
 

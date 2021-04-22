@@ -1,0 +1,27 @@
+{% extends "model-page.html" %}
+{% block content %}
+<style>
+    .titulo-fila-atendimento {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 35px;
+    color: rgb(17, 16, 16);
+    margin-bottom: 50;
+}
+</style>
+<p class="titulo-fila-atendimento">Fila de atendimento</p>
+<div class="container">
+    {% for unidade in unidades %}
+            <div class="row">
+            <div class="col">
+                <h5 class=""><b>{{unidade.nomeUnidadeSaude}}</b></h5>
+                <p class=""><b>Endereço:</b> {{unidade.enderecoUnidade}}</p>
+                <p>Quantidade de atendimentos para esta Unidade: {{unidade.atendimento_set.count}}</p>
+                {% for servico in unidade.servico.all %}
+                <p>{{servico.nomeServico}}</p>
+                {% endfor%}
+            </div><br>
+            </div>
+    {% endfor %}
+</div>
+{% endblock %}

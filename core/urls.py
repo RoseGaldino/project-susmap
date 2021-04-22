@@ -13,9 +13,9 @@ urlpatterns = [
     path('card/forms/submit', views.set_cardform),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
-    path('card/register/', views.register_unidades),
-    path('card/register/submit', views.set_card),
     path('', RedirectView.as_view(url="susmap/all/")),
     path('unidades/listar', views.unidades_listar, name='unidades-listar'),
-    path('atendimento/finalizar', views.finalizar_atendimento, name='finalizar-atendimento')
+    path('atendimento/finalizar', views.finalizar_atendimento, name='finalizar-atendimento'),
+    path('atendimento/listar', views.fila_atendimento, name='fila-atendimento'),
+    path('servico/cadastrar/', views.fila_atendimento, name='servico-cadastrar')
 ]
