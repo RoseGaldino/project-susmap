@@ -5,50 +5,63 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <title>SUSMAP</title>
+<stayle>
+    <style>
+        #menu a{
+            color: white;
+        }
+        .header{
+            background-color: cadetblue;
+            color: white;
+            background-image: linear-gradient(cadetblue, rgba(7, 14, 114, 0.904));
+        }
+        .logout a{
+            color: white;
+        }
+        .navbar{
+            margin-top: 50;
+        }
+    </style>
+</stayle>
 
-<style>
-    #menu a{
-        color: white;
-        background-color: rgba(7, 102, 146, 0.863);
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-    }
-    #menu a:hover{
-        color: white;
-        background-color: rgb(21, 121, 187);
-        border-bottom: rgb(40, 4, 107) solid 1px;
-    }
-    .jumbotron.header{
-        background-color: cadetblue;
-        color: white;
-        background-image: linear-gradient(cadetblue, rgba(7, 14, 114, 0.904));
-    }
-</style>
-
-<div class="jumbotron header text-center">
+<div class="header text-center">
     <h1>SUSMAP</h1>
-</div>
-
-<div class="text-right mr-4">
-    <a href="/logout/">Sair</a>
-</div>
-
-<div id="menu">
-    <ul class="nav ml-4 mb-4">
+    <nav class="navbar navbar-expand-lg menu-inicial">
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav">
+            {% if request.user.paciente %}
+            <li>
+                <a class="nav-link" href="/susmap/all/">Início</a>
+            </li>
+            {% endif %}
+            {% if request.user.paciente %}
+            <li>
+                <a class="nav-link" href="/card/forms">Formulário</a>
+            </li>
+            {% endif %}
+            {% if request.user.atendente %}
+            <li>
+                <a class="nav-link" href="/servico/cadastrar">Cadastrar Servico</a>
+            </li>
+            {% endif %}
+          </ul>
+          <!--<form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+          </form>-->
+        </div>
         {% if request.user.paciente %}
-        <li class="nav-item">
-            <a class="nav-link" href="/susmap/all/">Início</a>
-        </li>
-        {% endif %}
-        {% if request.user.paciente %}
-        <li class="nav-item">
-            <a class="nav-link" href="/card/forms">Formulário</a>
-        </li>
+        <div class="mr-4" style="color: rgb(255, 255, 255)">
+            <h4>Olá, {{user.paciente.user}}!</h4>
+        </div>
         {% endif %}
         {% if request.user.atendente %}
-        <li class="nav-item">
-            <a class="nav-link" href="/servico/cadastrar">Cadastrar Servico</a>
-        </li>
+        <div class="mr-4" style="color: rgb(255, 255, 255)">
+            <h4>Olá, {{user.atendente.user}}!</h4>
+        </div>
         {% endif %}
-    </ul>
+        <div class="text-right mr-4 logout">
+            <a href="/logout/">Sair</a>
+        </div>
+      </nav>
 </div>

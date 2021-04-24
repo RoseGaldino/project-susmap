@@ -9,7 +9,7 @@ from .models import Card, Sintoma, Qualificador, UnidadeSaude, Servico, Atendime
 @login_required(login_url='/login/')
 def list_all_susmap(request):
     card = Card.objects.filter(active=True)
-    return render(request, 'list.html', {'card':card})
+    return render(request, 'inicio.html', {'card':card})
 #Dicionário -> {'card':card}, 'card' vai ser todo resultado de Card.objects.filter(active=True)
 
 def list_user(request):

@@ -1,0 +1,28 @@
+<html>
+    <head>
+        {% block style%} {% endblock %}
+        {% include "model-header.html" %}
+    </head>
+
+    <body>
+        {% block content %} {%endblock%}
+        {% if request.user.paciente %}
+        <div class="container" style="margin-top: 50px;">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6 alert alert-primary" role="alert">
+                    <p><h5>Seja bem vindo!</h5> Este sistema tem como objetivo lhe informar sobre 
+                        as unidades de atendimento que atende as suas necessidades 
+                        de acordo com os sintomas informados na aba formulário.
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+                        Favor preencher o formulário e seguir para a unidade que melhor lhe atende!
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% include "model-footer.html" %}
+    </body>
+</html>
